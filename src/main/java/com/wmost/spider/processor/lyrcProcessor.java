@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 import com.wmost.app.*;
 import com.wmost.cfig.LOG;
 import com.wmost.cfig.LOG_TYPE;
-import com.wmost.spider.model.user;
+import com.wmost.spider.model.candidate;
 import com.wmost.util.deviceIfo;
 
 import us.codecraft.webmagic.Page;
