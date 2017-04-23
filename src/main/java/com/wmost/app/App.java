@@ -19,14 +19,18 @@ import com.wmost.weber.weber;
 
 
 public class App {
-	private static String VERSION = "0.1.2";
+	private static String VERSION = "0.1.5";
 	
 	public static void main(String[] args) {
 		long startTime, endTime;
         startTime =System.currentTimeMillis();
         
-        System.out.println("======================"+"netSpider"+"========================");
-        System.out.println("========================"+VERSION+"==========================");
+        System.out.println(	 "=============================================="
+        					+"jobMiner"
+        					+"==============================================");
+        System.out.println(	 "==============================================["
+        					+VERSION
+        					+"]==============================================");
         
         cfig.submit(args);
         weber.submit(args);
