@@ -15,7 +15,10 @@ public class candidate {
 	public String key					;//标识
 	public String src					;//来源
 	public String name					;//名称
+	public String gender				;//性别
+	public String ethnic				;//民族
 	public String major					;//学历
+	public String school				;//学校
 	public String capacity				;//能力
 	public String experience			;//经验
 	public String industry				;//行业
@@ -43,7 +46,10 @@ public class candidate {
 				getKey()			,
 				src					,
 				name				,
+				gender				,
+				ethnic				,
 				major				,
+				school				,
 				capacity			,
 				experience			,
 				industry			,

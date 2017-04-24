@@ -13,17 +13,14 @@ package com.wmost.spider.peline;
 import java.util.Map;
 import java.util.UUID;
 
-import net.sf.json.JSONObject;
-
 import org.apache.log4j.Logger;
 
+import com.google.gson.Gson;
 import com.wmost.spider.model.company;
 import com.wmost.spider.model.position;
 import com.wmost.spider.model.candidate;
-import com.wmost.util.json2Obj;
 import com.wmost.util.safeString;
 import com.wmost.cfig.LOG;
-import com.wmost.cfig.LOG_TYPE;
 import com.wmost.cfig.UNICODE;
 
 import us.codecraft.webmagic.ResultItems;
@@ -42,34 +39,28 @@ public class logpeline implements Pipeline {
 			return;
 		}
 		
+		Map<String, Object> map = resultItems.getAll();
 		if (IS_DEBUG) {
 			for (Map.Entry<String, Object> entry : resultItems.getAll().entrySet()) {
 	            System.out.println(entry.getKey() + ":\t" + entry.getValue());
 			}
 		}
 		
-		//Map转JSON
-		Map<String, Object> map = resultItems.getAll();
-		JSONObject json = JSONObject.fromObject(map); 
-		if (IS_DEBUG) {
-			System.out.println("收到json为:"+json.toString());
-		}
-		
 		//JSON转类(!!!当新增统计类型时修改本处)
-		Object o = null;
+		Object[] o = null;
 		String log_type = map.get(LOG.log_type).toString();
 		switch (log_type){
-			case LOG_TYPE.LOG_TYPE_USER+"":
-				o=(candidate)json2Obj.mapToObject(json,candidate.class);
+			case LOG.LOG_TYPE.LOG_TYPE_CANDIDATE+"":
+				o=(candidate[]) new Gson().fromJson((String) map.get(LOG.body), candidate[].class);
 				break;
-			case LOG_TYPE.LOG_TYPE_COMPANY+"":
-				o=(company)json2Obj.mapToObject(map, company.class);
+			case LOG.LOG_TYPE.LOG_TYPE_COMPANY+"":
+				o=(company[]) new Gson().fromJson((String) map.get(LOG.body), company[].class);
 				break;
-			case LOG_TYPE.LOG_TYPE_JOB+"":
-				o=(position)json2Obj.mapToObject(json,position.class);
+			case LOG.LOG_TYPE.LOG_TYPE_POSITION+"":
+				o=(position[]) new Gson().fromJson((String) map.get(LOG.body), position[].class);
 				break;
 			default:
-				o=new String("unrecognition log_type!");
+				o=new String[]{"unrecognition log_type!"};
 				break;
 		}
 		if (IS_DEBUG) {
@@ -77,12 +68,17 @@ public class logpeline implements Pipeline {
 		}
 		
 		//日志输出
-		String s = logPrintln(resultItems,o);
-		if (IS_DEBUG && null != s) {
-			System.out.println("拼装的日志为:"+s);
-		}
-		if (null != logger && null != s) {
-			logger.fatal(s);
+		for (Object oo:o) {
+			if (null == oo) {
+				continue;
+			}
+			String s = logPrintln(resultItems,oo);
+			if (IS_DEBUG && null != s) {
+				System.out.println("拼装的日志为:"+s);
+			}
+			if (null != logger && null != s) {
+				logger.fatal(s);
+			}	
 		}
 	}
 	

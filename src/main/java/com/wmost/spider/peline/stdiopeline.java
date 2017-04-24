@@ -19,10 +19,9 @@ import net.sf.json.JSONObject;
 import com.wmost.spider.model.company;
 import com.wmost.spider.model.position;
 import com.wmost.spider.model.candidate;
-import com.wmost.util.json2Obj;
+import com.wmost.util.map2Obj;
 import com.wmost.util.safeString;
 import com.wmost.cfig.LOG;
-import com.wmost.cfig.LOG_TYPE;
 import com.wmost.cfig.UNICODE;
 
 import us.codecraft.webmagic.ResultItems;
@@ -57,14 +56,14 @@ public class stdiopeline implements Pipeline {
 		Object o = null;
 		String log_type = map.get(LOG.log_type).toString();
 		switch (log_type){
-			case LOG_TYPE.LOG_TYPE_USER+"":
-				o=(candidate)json2Obj.mapToObject(json,candidate.class);
+			case LOG.LOG_TYPE.LOG_TYPE_CANDIDATE+"":
+				o=(candidate)map2Obj.mapToObject(json,candidate.class);
 				break;
-			case LOG_TYPE.LOG_TYPE_COMPANY+"":
-				o=(company)json2Obj.mapToObject(map, company.class);
+			case LOG.LOG_TYPE.LOG_TYPE_COMPANY+"":
+				o=(company)map2Obj.mapToObject(map, company.class);
 				break;
-			case LOG_TYPE.LOG_TYPE_JOB+"":
-				o=(position)json2Obj.mapToObject(json,position.class);
+			case LOG.LOG_TYPE.LOG_TYPE_POSITION+"":
+				o=(position)map2Obj.mapToObject(json,position.class);
 				break;
 			default:
 				o=new String("unrecognition log_type!");

@@ -25,6 +25,9 @@
 	key						标识
 	src						来源
 	name					名称
+	gender					性别
+	ethnic					民族
+	school					学校
 	major					学历
 	capacity				能力
 	experience				经验

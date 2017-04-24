@@ -11,7 +11,7 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
-public class json2Obj {
+public class map2Obj {
 /****方式1****/
 //    public static Object mapToObject(Map<String, Object> map, Class<?> beanClass) {    
 //        if (map == null){
