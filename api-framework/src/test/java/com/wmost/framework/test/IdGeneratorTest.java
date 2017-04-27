@@ -1,4 +1,4 @@
-package com.xxx.api.test;
+package com.wmost.framework.test;
 
 import com.wmost.framework.jdbc.id.IdGenerator;
 import com.wmost.framework.jdbc.id.impl.DefaultIdGenerator;
