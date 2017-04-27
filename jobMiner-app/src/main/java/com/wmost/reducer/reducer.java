@@ -15,7 +15,7 @@ public class reducer {
 		long startTime, endTime;
         startTime =System.currentTimeMillis();
         
-        
+        cluster.Submit();
 		
         endTime = System.currentTimeMillis();
         System.out.println("【数据引擎】启动完成,耗时(ms):" + (endTime - startTime));

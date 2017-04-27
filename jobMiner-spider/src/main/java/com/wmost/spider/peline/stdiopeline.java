@@ -34,6 +34,7 @@ public class stdiopeline implements Pipeline {
 	private static boolean IS_DEBUG = false;
 	private static Logger logger  =  Logger.getLogger(logpeline.class);
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void process(ResultItems resultItems, Task task) {
 		if (null == resultItems.get(LOG.log_type)){

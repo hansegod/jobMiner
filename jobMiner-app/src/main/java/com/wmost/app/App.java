@@ -20,7 +20,7 @@ import com.wmost.weber.weber;
 
 
 public class App {
-	private static String VERSION = "0.2.1";
+	private static String VERSION = "0.2.2";
 	
 	public static void main(String[] args) {
 		long startTime, endTime;

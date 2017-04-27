@@ -18,6 +18,7 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
+import com.wmost.reducer.flume;
 import com.wmost.spider.model.company;
 import com.wmost.spider.model.position;
 import com.wmost.spider.model.candidate;
@@ -79,7 +80,11 @@ public class logpeline implements Pipeline {
 				System.out.println("拼装的日志为:"+s);
 			}
 			if (null != logger && null != s) {
+				//写入日志文件
 				logger.fatal(s);
+				
+				//日志文件被flume收集
+				flume.LogFile2Kafka.collect(s);
 			}	
 		}
 	}
