@@ -9,6 +9,7 @@
 
 package com.wmost.cfig;
 
+
 public class cfig {
 	public static void submit(String[] args) {
 		long startTime, endTime;

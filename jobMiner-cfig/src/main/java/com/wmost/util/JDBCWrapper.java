@@ -15,6 +15,9 @@ import java.util.concurrent.LinkedBlockingQueue;
 //		2016-09-14 16:42		增加查询,插入连续操作方法
 //		2016-09-18 11:42		增加初始化时的遗留数据清理,增加查询/批处理方法调用时的参数合法性检测
 //		2016-09-20 17:01		增加日志方法,增加数据库连接关闭
+//		2017-05-03 17:01		清除日志输出
+
+
 
 public class JDBCWrapper {
 	@SuppressWarnings("unused")
@@ -33,9 +36,9 @@ public class JDBCWrapper {
 	static {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			logg.Println("Class JDBCWrapper Load JDBC dirver is ok..."); 
+			//logg.Println("Class JDBCWrapper Load JDBC dirver is ok..."); 
 		} catch (ClassNotFoundException e) {
-			logg.Error("Class JDBCWrapper Load JDBC dirver is failed!"); 
+			//logg.Error("Class JDBCWrapper Load JDBC dirver is failed!"); 
 			e.printStackTrace();
 		}
 	}
@@ -56,14 +59,14 @@ public class JDBCWrapper {
 		
 		if (jdbcInstance == null){ 
 			synchronized(JDBCWrapper.class){
-				logg.Println("Class JDBCWrapper Build JDBC instance first time...");
+				//logg.Println("Class JDBCWrapper Build JDBC instance first time...");
 				if (jdbcInstance == null){
 					jdbcInstance = new JDBCWrapper(server,db,name,password,pool);
-					logg.Println("Class JDBCWrapper Build JDBC instance is ok......................");
+					//logg.Println("Class JDBCWrapper Build JDBC instance is ok......................");
 				}           
 			}   
 		}else{
-			logg.Println("Class JDBCWrapper Build JDBC instance has been builded return ...");	
+			//logg.Println("Class JDBCWrapper Build JDBC instance has been builded return ...");	
 		}
 		
 		return jdbcInstance;
@@ -74,39 +77,39 @@ public class JDBCWrapper {
 			return;
 		}
 		pool = (pool > 0) ? pool : 1;
-		logg.Println("Class JDBCWrapper Build JDBC link pool is building...");
+		//logg.Println("Class JDBCWrapper Build JDBC link pool is building...");
 		//1.清理链表
 		while (0 < dbConnectionPool.size()){
 			try {
 				dbConnectionPool.poll().close();
 			} catch (SQLException e) {
-				logg.Error("Class JDBCWrapper JDBCWrapper() SQLException err...");
+				//logg.Error("Class JDBCWrapper JDBCWrapper() SQLException err...");
 				e.printStackTrace();
 			}
 		}
 		//2.生成连接池
 		String dburl = "jdbc:mysql://"+ server + "/" + db;
-		logg.Println("Class JDBCWrapper connect to:" + dburl + "/use:" + name + "/" + password);
+		//logg.Println("Class JDBCWrapper connect to:" + dburl + "/use:" + name + "/" + password);
 		for (int i = 0; i < pool; i++){
 			try {
 				Connection conn = DriverManager.getConnection(dburl,name,password);
 				dbConnectionPool.put(conn);
 			} catch (Exception e) {
-				logg.Error("Class JDBCWrapper Build JDBC link pool is failed!");
+				//logg.Error("Class JDBCWrapper Build JDBC link pool is failed!");
 				e.printStackTrace();
 			}
 		} 
-		logg.Println("Class JDBCWrapper Build JDBC link pool is ok....");
+		//logg.Println("Class JDBCWrapper Build JDBC link pool is ok....");
 		
 	}
 	//连接池
 	public synchronized Connection getConnection(){
 		while (0 == dbConnectionPool.size()){
 			try {
-				Thread.sleep(100);
+				Thread.sleep(1000);
 				//logg.Println("Class JDBCWrapper Get JDBC link pool is waiting getConnection...");
 			} catch (InterruptedException e) {
-				logg.Error("Class JDBCWrapper Get JDBC link pool is failed!");
+				//logg.Error("Class JDBCWrapper Get JDBC link pool is failed!");
 				e.printStackTrace();
 			}
 		}
@@ -117,7 +120,7 @@ public class JDBCWrapper {
 	//执行批处理
 	public int[] doBatch(String sqlText, List<Object[]> paramsList) {
 		if (sqlText.equals("") || paramsList == null ){
-			logg.Println("Class JDBCWrapper JDBC doQuery() parameter err!");
+			//logg.Println("Class JDBCWrapper JDBC doQuery() parameter err!");
 			return new int[]{};
 		}
 		Connection conn = getConnection();
@@ -135,7 +138,7 @@ public class JDBCWrapper {
 			result = preparedStatement.executeBatch();
 			conn.commit();
 		} catch (Exception e) {
-			logg.Error("Class JDBCWrapper JDBC doBatch is failed!");
+			//logg.Error("Class JDBCWrapper JDBC doBatch is failed!");
 			e.printStackTrace();
 		} finally {
 			if (preparedStatement != null){
@@ -159,7 +162,7 @@ public class JDBCWrapper {
 	//查询
 	public void doQuery(String sqlText, Object[] paramsList, ExecuteCallBack callBack) {
 		if (sqlText.equals("") || paramsList == null || paramsList.length == 0 || callBack == null){
-			logg.Println("Class JDBCWrapper JDBC doQuery() parameter err!");
+			//logg.Println("Class JDBCWrapper JDBC doQuery() parameter err!");
 			return;
 		}
 		Connection conn = getConnection();
@@ -173,7 +176,7 @@ public class JDBCWrapper {
 			result = preparedStatement.executeQuery();
 			callBack.resultCallBack(result);
 		} catch (Exception e) {
-			logg.Error("Class JDBCWrapper JDBC doQuery is failed!");
+			//logg.Error("Class JDBCWrapper JDBC doQuery is failed!");
 			e.printStackTrace();
 		} finally {
 			if (preparedStatement != null){
@@ -195,7 +198,7 @@ public class JDBCWrapper {
 	//执行批处理
 	public int[] doBatchUnCommit(String sqlText, List<Object[]> paramsList,Connection conn) {
 		if (sqlText.equals("") || paramsList == null || conn == null){
-			logg.Error("Class JDBCWrapper JDBC doBatchUnCommit() parameter err!");
+			//logg.Error("Class JDBCWrapper JDBC doBatchUnCommit() parameter err!");
 			return new int[]{};
 		}
 		PreparedStatement preparedStatement = null;
@@ -210,7 +213,7 @@ public class JDBCWrapper {
 			}
 			result = preparedStatement.executeBatch();
 		} catch (Exception e) {
-			logg.Error("Class JDBCWrapper JDBC doBatchUnCommit is failed! "+sqlText);
+			//logg.Error("Class JDBCWrapper JDBC doBatchUnCommit is failed! "+sqlText);
 			e.printStackTrace();
 		} finally {
 			if (preparedStatement != null){
@@ -234,13 +237,13 @@ public class JDBCWrapper {
 	//查询
 	public void doQueryUnCommit(String sqlText, Object[] paramsList, ExecuteCallBack callBack,Connection conn) {
 		if (sqlText.equals("") || paramsList == null || paramsList.length == 0 || callBack == null || conn == null){
-			logg.Error("Class JDBCWrapper JDBC doQueryUnCommit() parameter err!");
+			//logg.Error("Class JDBCWrapper JDBC doQueryUnCommit() parameter err!");
 			return;
 		}
 		try {
 			conn.isClosed();
 		} catch (SQLException e1) {
-			logg.Error("Class JDBCWrapper JDBC doQueryUnCommit() conn isClosed() err!");
+			//logg.Error("Class JDBCWrapper JDBC doQueryUnCommit() conn isClosed() err!");
 			e1.printStackTrace();
 			return;
 		}
@@ -254,7 +257,7 @@ public class JDBCWrapper {
 			result = preparedStatement.executeQuery(); 
 			callBack.resultCallBack(result,conn);
 		} catch (Exception e) {
-			logg.Error("Class JDBCWrapper JDBC doQueryUnCommit is failed!");
+			//logg.Error("Class JDBCWrapper JDBC doQueryUnCommit is failed!");
 			e.printStackTrace();
 		} finally {
 			if (preparedStatement != null){
@@ -280,13 +283,13 @@ public class JDBCWrapper {
 				 try {
 					dbConnectionPool.poll().close();
 				} catch (SQLException e) {
-					logg.Error("Class JDBCWrapper JDBC Close() err!");
+					//logg.Error("Class JDBCWrapper JDBC Close() err!");
 					e.printStackTrace();
 				}
 			}
 			dbConnectionPool.clear();
 			jdbcInstance=null;
-			logg.Println("Class JDBCWrapper JDBC Close() ok...");
+			//logg.Println("Class JDBCWrapper JDBC Close() ok...");
 		}
 	}
 }

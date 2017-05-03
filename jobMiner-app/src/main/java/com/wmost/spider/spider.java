@@ -32,7 +32,7 @@ public class spider {
 		
 		/*********************************************/
 		//System.out.println("【rc.lyrc.net-爬取演示】");
-        spider.LYRC();
+        //spider.LYRC();
 		
         endTime = System.currentTimeMillis();
         System.out.println("【爬虫引擎】启动成功,耗时(ms):" + (endTime - startTime));

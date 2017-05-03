@@ -18,11 +18,12 @@ import java.util.UUID;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
-import com.wmost.reducer.flume;
+import com.wmost.reducer.flume_in;
 import com.wmost.spider.model.company;
 import com.wmost.spider.model.position;
 import com.wmost.spider.model.candidate;
 import com.wmost.util.SafeString;
+import com.wmost.util.timeUtil;
 import com.wmost.cfig.LOG;
 import com.wmost.cfig.UNICODE;
 
@@ -84,7 +85,7 @@ public class logpeline implements Pipeline {
 				logger.fatal(s);
 				
 				//日志文件被flume收集
-				flume.LogFile2Kafka.collect(s);
+				flume_in.collect(s);
 			}	
 		}
 	}
@@ -95,8 +96,8 @@ public class logpeline implements Pipeline {
 			return null;
 		}
 		
-		//time_stamp(日志器生成)
-		
+		//time_stamp
+		String time = timeUtil.getTime();
 		//log_type
 		String log_type = resultItems.get(LOG.log_type);
 		//search_key
@@ -111,12 +112,13 @@ public class logpeline implements Pipeline {
 		String server_ip = resultItems.get(LOG.server_ip);
 		
 		return String.join(
-				UNICODE.JOIN, 
-				log_type,
-				search_key,
-				time_ms,
-				error_code,
-				SafeString.to(body),
+				UNICODE.JOIN			,
+				time					,
+				log_type				,
+				search_key				,
+				time_ms					,
+				error_code				,
+				SafeString.to(body)		,
 				server_ip
 				);		
 	}

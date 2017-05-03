@@ -1,9 +1,9 @@
 /**
-@description  数据引擎-storm服务-数据清洗-数据计算
+@description  数据引擎-flume服务-数据落地入仓
 @author hanse/irene
 @data	2017-04-08	00:00	初稿
 		2017-04-21	00:00	整理代码
-		2017-05-02	00:00	修改采用BlockingQueue实现消息缓冲
+		2017-05-02	00:00	分离flume,日志收集及落地hdfs为两个服务
 		
 **/
 
@@ -12,20 +12,20 @@ package com.wmost.reducer;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class storm implements Runnable{
+public class flume_out implements Runnable{
 	private static final int BUFFER_SIZE = 100;
 	private static BlockingQueue <String> buffer = new ArrayBlockingQueue<String>(BUFFER_SIZE);
-	//模拟kafka生产者服务
-	public static void collect(String msg){
+	//模拟flume以storm为源收集清洗日志服务
+	public static synchronized void collect(String msg){
 		try {
 			buffer.put(msg);
-			//System.out.println("storm获取:"+msg);
+			//System.out.println("flume获取:"+msg);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	//模拟kafka消费者服务
+	//模拟flume转发清洗后日志落地至HDFS服务
 	public static String distribution(){
 		String msg = null;
 		try {
@@ -46,31 +46,10 @@ public class storm implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
-			msg = storm.distribution();
-			
-			//清洗数据
-			msg = wash(msg);
-			
-			//将数据计算后写入hdfs
-			if(null!=msg) {
-				//处理数据
-				hdfs.collect(msg);
-			}
-		}
-	}
-	
-	//数据清洗
-	public static String wash(String msg){
-		String result = null;
-		//合法性校验,字段缺失补齐,数据规整等处理,数据非法时返回null
-		{
-			//暂不做处理,后续优化
-			result = msg;
-			
-			
-		}
-		
-		return result;
+
+			//将清洗后的数据写入hdfs
+			msg = flume_out.distribution();
+			hdfs.collect(msg);
+		}	
 	}
 }

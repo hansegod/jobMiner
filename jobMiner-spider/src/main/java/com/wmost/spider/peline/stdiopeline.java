@@ -23,6 +23,7 @@ import com.wmost.spider.model.position;
 import com.wmost.spider.model.candidate;
 import com.wmost.util.Map2Obj;
 import com.wmost.util.SafeString;
+import com.wmost.util.timeUtil;
 import com.wmost.cfig.LOG;
 import com.wmost.cfig.UNICODE;
 
@@ -89,8 +90,8 @@ public class stdiopeline implements Pipeline {
 			return null;
 		}
 		
-		//time_stamp(日志器生成)
-		
+		//time_stamp
+		String time = timeUtil.getTime();
 		//log_type
 		String log_type = resultItems.get(LOG.log_type);
 		//search_key
@@ -105,12 +106,13 @@ public class stdiopeline implements Pipeline {
 		String server_ip = resultItems.get(LOG.server_ip);
 		
 		return String.join(
-				UNICODE.JOIN, 
-				log_type,
-				search_key,
-				time_ms,
+				UNICODE.JOIN			, 
+				time					,
+				log_type				,
+				search_key				,
+				time_ms					,
 				error_code,
-				SafeString.to(body),
+				SafeString.to(body)		,
 				server_ip
 				);		
 	}
