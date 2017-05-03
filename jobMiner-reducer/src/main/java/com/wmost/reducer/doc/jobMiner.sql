@@ -4,7 +4,8 @@
 @author hanse/irene
 @data	2017-04-21	00:00	初稿
 		2017-04-27	21:01	调整,写入成功
-
+		2017-05-03	21:01	调整id字段
+		
 */
 
 CREATE DATABASE `jobMiner`;
@@ -12,7 +13,7 @@ CREATE DATABASE `jobMiner`;
 USE `jobMiner`;
 
 CREATE TABLE `position` (
-	`id` char(32) NOT NULL,
+	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	
 	`time_stamp` 	varchar(20) 	DEFAULT '' COMMENT '日志时间戳',
 	`log_type` 		varchar(4) 		DEFAULT '' COMMENT '日志类型',
@@ -26,7 +27,7 @@ CREATE TABLE `position` (
 	`name` 				varchar(64) 	DEFAULT '' COMMENT '职位',
 	`company` 			varchar(64) 	DEFAULT '' COMMENT '公司',
 	`industry` 			varchar(64) 	DEFAULT '' COMMENT '行业',
-	`scale` 			varchar(64) 	DEFAULT '' COMMENT '规模',
+	`scale` 			varchar(20) 	DEFAULT '' COMMENT '规模',
 	`nature` 			varchar(64) 	DEFAULT '' COMMENT '性质',
 	`website` 			varchar(64) 	DEFAULT '' COMMENT '网址',
 	`count` 			varchar(10) 	DEFAULT '' COMMENT '数量',
@@ -51,7 +52,7 @@ CREATE TABLE `position` (
 
 
 CREATE TABLE `company` (
-	`id` char(32) NOT NULL,
+	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	
 	`time_stamp` 	varchar(20) 	DEFAULT '' COMMENT '日志时间戳',
 	`log_type` 		varchar(4) 		DEFAULT '' COMMENT '日志类型',
@@ -64,7 +65,7 @@ CREATE TABLE `company` (
 	`src` 				varchar(64) 	DEFAULT '' COMMENT '来源',
 	`name` 				varchar(64) 	DEFAULT '' COMMENT '名称',
 	`industry` 			varchar(20) 	DEFAULT '' COMMENT '行业',
-	`scale` 			varchar(10) 	DEFAULT '' COMMENT '规模',
+	`scale` 			varchar(20) 	DEFAULT '' COMMENT '规模',
 	`nature` 			varchar(20) 	DEFAULT '' COMMENT '性质',
 	`position` 			varchar(64) 	DEFAULT '' COMMENT '职位',
 	`salary` 			varchar(10) 	DEFAULT '' COMMENT '薪资',
@@ -82,7 +83,7 @@ CREATE TABLE `company` (
 
 
 CREATE TABLE `candidate` (
-	`id` char(32) NOT NULL,
+	`id` bigint(20) NOT NULL AUTO_INCREMENT,
 	
 	`time_stamp` 	varchar(20) 	DEFAULT '' COMMENT '日志时间戳',
 	`log_type` 		varchar(4) 		DEFAULT '' COMMENT '日志类型',
@@ -101,7 +102,7 @@ CREATE TABLE `candidate` (
 	`capacity` 			varchar(64) 	DEFAULT '' COMMENT '能力',
 	`experience` 		varchar(512) 	DEFAULT '' COMMENT '经验',
 	`industry` 			varchar(64) 	DEFAULT '' COMMENT '行业',
-	`scale` 			varchar(10) 	DEFAULT '' COMMENT '规模',
+	`scale` 			varchar(20) 	DEFAULT '' COMMENT '规模',
 	`nature` 			varchar(64) 	DEFAULT '' COMMENT '性质',
 	`position` 			varchar(64) 	DEFAULT '' COMMENT '职位',
 	`type` 				varchar(4) 		DEFAULT '' COMMENT '类型',
