@@ -40,6 +40,7 @@ public class spark implements Runnable{
 	@Override
 	public void run() {
 		while(true) {
+			@SuppressWarnings("unused")
 			String msg = null;
 			
 			try {

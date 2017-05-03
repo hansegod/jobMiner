@@ -20,7 +20,7 @@ import com.wmost.spider.processor.dianhouPositionProcessor;
 import com.wmost.spider.processor.lyrcCandidateProcessor;
 
 public class spider {
-	private static boolean IS_DEBUG = false;
+	//private static boolean IS_DEBUG = false;
 	
 	public static void submit(String[] args) {
 		long startTime, endTime;

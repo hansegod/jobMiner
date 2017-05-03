@@ -11,7 +11,12 @@ import java.util.Date;
  */
 public class AdvertiserResult implements Serializable {
 
-    private String id;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4547377869145608614L;
+
+	private String id;
 
     private String advertiserName;
 

@@ -1,4 +1,4 @@
-package com.xxx.sample.api.test;
+package com.wmost.weber;
 
 import com.wmost.framework.jdbc.paging.Paging;
 import com.wmost.weber.result.AdvertiserResult;

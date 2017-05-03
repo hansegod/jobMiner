@@ -12,7 +12,6 @@
 package com.wmost.reducer.hive_record;
 
 import com.wmost.cfig.UNICODE;
-import com.wmost.cfig.cfig;
 
 
 public class company {

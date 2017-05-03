@@ -8,7 +8,12 @@ package com.wmost.framework.security;
  */
 public class TokenException extends RuntimeException {
 
-    public TokenException(String message) {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7422515811661488845L;
+
+	public TokenException(String message) {
         super(message);
     }
 }

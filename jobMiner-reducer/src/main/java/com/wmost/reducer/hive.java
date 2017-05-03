@@ -25,7 +25,6 @@ import com.wmost.reducer.tables.position;
 import com.wmost.reducer.tables.tables_interface;
 import com.wmost.util.ExecuteCallBack;
 import com.wmost.util.JDBCWrapper;
-import com.wmost.util.logg;
 import com.wmost.util.timeUtil;
 
 public class hive implements Runnable{

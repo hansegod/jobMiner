@@ -12,7 +12,6 @@
 package com.wmost.reducer.hive_record;
 
 import com.wmost.cfig.UNICODE;
-import com.wmost.cfig.cfig;
 
 public class position {
 	public String time_stamp		;//日志时间戳
