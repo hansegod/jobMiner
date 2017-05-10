@@ -1,6 +1,8 @@
 package com.wmost.weber.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+
 
 /**
  * 用户服务
@@ -10,9 +12,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class UserService {
-
+	private Logger logger  =  Logger.getLogger(UserService.class);
+	
     public boolean login(String username, String password) {
         // TODO
-        return username.equals(password);
+    	logger.debug("[登录]用户名:"+username+",密码:"+password);
+    	
+        return true;
     }
 }
