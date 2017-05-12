@@ -79,12 +79,13 @@
 		    <version>7.0</version>  
 		</dependency>
 		
-        <!-- API Framework -->
+        <!-- API Framework 
         <dependency>
             <groupId>com.wmost.framework</groupId>
             <artifactId>api-framework</artifactId>
             <version>1.0.0</version>
         </dependency>
+        -->
     </dependencies>
 	
 	<build>  

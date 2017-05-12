@@ -1,0 +1,92 @@
+《spring MVC学习指南》人民邮电出版社 
+
+学习笔记
+	1./WEB-INF/web.xml 为部署描述符,用于配置web应用部署相关的一些配置参数;
+	
+	2.web.xml中如下语句,配置了采用spring-MVC的默认servlet,并将'/'下所有请求通过其输出,
+	该配置指定了spring-mvc.xml配置文件,否则,会默认查找WEB-INF下名为<servlet-name>-servlet.xml的配置文件;
+	<servlet>
+		<!-- spring-MVC -->
+		<servlet-name>dispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<!-- spring-MVC config.xml -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+	3.对于静态资源,通过web.xml中配置如下
+	<!-- 注册用于支持基于注解的控制器的请求处理方法的bean,与resources mapping配合使用  -->
+	<mvc:annotation-driven/>
+	<!-- 不拦截静态资源 -->
+	<servlet-mapping>    
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+        <url-pattern>/view/*</url-pattern>
+        <url-pattern>*.jpg</url-pattern>
+        <url-pattern>*.png</url-pattern>
+        <url-pattern>*.gif</url-pattern>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.swf</url-pattern>
+        <url-pattern>*.pdf</url-pattern>
+        <url-pattern>*.java</url-pattern>
+        <url-pattern>*.class</url-pattern>
+        <url-pattern>*.xls</url-pattern>
+        <url-pattern>*.xlsx</url-pattern>
+        <url-pattern>*.et</url-pattern>
+        <url-pattern>*.vm</url-pattern>
+        <url-pattern>*.html</url-pattern>
+    </servlet-mapping>
+    srping-mvc.xml配置如下
+    <!-- 支持静态资源,不通过dispatcherServlet处理,使得文件可见  -->
+	<mvc:resources mapping="/view/**" location="/view/" />
+	来实现静态资源页面的可见性;
+	
+	4.重定向,"redirect:/path",将经过终端,解决重定向模型丢失需要
+	A.springmvc.xml中配置<annotation-driven>
+	B.增加RedirectAttributes变量
+	C.采用addFlashAttribute()方法传递参数
+	5.采用注解向spring-mvc添加控制器
+	<!-- weber.controller 控制器,指示spring去扫描控制器类/服务类   -->
+    <!-- 配合beans中的 xmlns:context="http://www.springframework.org/schema/context" 实现基于注解的控制器类 -->
+    <context:component-scan base-package="com.wmost.weber.controller"/>
+	
+	6.@Autowired用于对象的依赖注入,被依赖注入类采用@Service注解,同时,在spring-mvc.xml配置文件中增加
+	<context:component-scan base-package="com.wmost.weber.service"/>
+	
+	7.@ModelAttribute注解,其中modelName可省略,这是使用model为名称
+	public String xxxx(@ModelAttribute("modelName") Model model){
+		....
+	}
+	
+	8.数据绑定和表单标签
+	
+	9.转换器和格式化,Converter、Formatter
+	
+	10.验证器,Validator
+	
+	11.标的是语言,EL,${xxxxx}
+	
+	A.'.'、'[]'的用法
+	B.隐式对象
+	C.运算符
+	
+	12.文件上传
+	
+	13.下载文件
+	
+	
+	
+	
+	
+	
+	
+	
+	

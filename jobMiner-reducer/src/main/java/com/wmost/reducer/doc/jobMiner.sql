@@ -8,6 +8,7 @@
 		
 */
 
+#数据库存在时注释
 CREATE DATABASE `jobMiner`;
 
 USE `jobMiner`;
