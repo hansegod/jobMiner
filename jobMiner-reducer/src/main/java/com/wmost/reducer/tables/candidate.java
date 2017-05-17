@@ -13,7 +13,9 @@ package com.wmost.reducer.tables;
 
 import com.wmost.cfig.UNICODE;
 
-public class candidate {
+public class candidate implements tables_interface {
+	public final static String TABLE = "candidate";
+	
 	public String time_stamp		;//日志时间戳
 	public String log_type			;//日志类型
 	public String search_key		;//日志唯一标识[0-9A-Za-z]{32}
@@ -88,4 +90,120 @@ public class candidate {
 				server_ip					
     			);
     }
+
+	@Override
+	public String getQuerSQL() {
+		return "SELECT * FROM " 
+				+ TABLE 
+				+ " WHERE " 
+				+ " time_stamp=? AND `name`=? AND gender=? AND ethnic=?";
+	}
+
+	@Override
+	public String getInsertSQL() {
+		return "INSERT INTO " 
+				+ TABLE 
+				+ " (time_stamp,log_type,search_key,time_ms,error_code,`key`,src,`name`,gender,ethnic,major,school,capacity,experience,industry,scale,nature,position,type,salary,location,expect_industry,expect_scale,expect_nature,expect_position,expect_type,expect_salary,expect_location,tag,server_ip)"
+				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	}
+
+	@Override
+	public String getUpdataSQL() {
+		return "UPDATE " 
+				+ TABLE 
+				+ " SET time_stamp=?,log_type=?,search_key=?,time_ms=?,error_code=?,`key`=?,src=?,`name`=?,gender=?,ethnic=?,major=?,school=?,capacity=?,experience=?,industry=?,scale=?,nature=?,position=?,type=?,salary=?,location=?,expect_industry=?,expect_scale=?,expect_nature=?,expect_position=?,expect_type=?,expect_salary=?,expect_location=?,tag=?,server_ip=? "
+				+ " WHERE time_stamp=? AND `name`=? AND gender=? AND ethnic=?";
+	}
+
+	@Override
+	public Object[] getQueryObj() {
+		return new Object[]{
+				time_stamp			,
+				name				,
+				gender				,
+				ethnic				,
+			};
+	}
+
+	@Override
+	public Object[] getUpdataObj() {
+		return new Object[]{
+				time_stamp			,
+				log_type			,
+				search_key			,
+				time_ms				,
+				error_code			,
+				
+				key					,
+				src					,
+				name				,
+				gender				,
+				ethnic				,
+				major				,
+				school				,
+				capacity			,
+				experience			,
+				industry			,
+				scale				,
+				nature				,
+				position			,
+				type				,
+				salary				,
+				location			,
+				expect_industry		,
+				expect_scale		,
+				expect_nature		,
+				expect_position		,
+				expect_type			,
+				expect_salary		,
+				expect_location		,
+				tag					,
+				
+				server_ip			,
+				
+				
+				time_stamp			,
+				name				,
+				gender				,
+				ethnic				,
+			};
+	}
+
+	@Override
+	public Object[] getInsertObj() {
+		return new Object[]{
+				time_stamp			,
+				log_type			,
+				search_key			,
+				time_ms				,
+				error_code			,
+				
+				key					,
+				src					,
+				name				,
+				gender				,
+				ethnic				,
+				major				,
+				school				,
+				capacity			,
+				experience			,
+				industry			,
+				scale				,
+				nature				,
+				position			,
+				type				,
+				salary				,
+				location			,
+				expect_industry		,
+				expect_scale		,
+				expect_nature		,
+				expect_position		,
+				expect_type			,
+				expect_salary		,
+				expect_location		,
+				tag					,
+				
+				server_ip			,
+			};
+	}
 }

@@ -211,6 +211,7 @@ public class JDBCWrapper {
 				}
 				preparedStatement.addBatch();
 			}
+			//System.out.println("preparedStatement.executeBatch():"+preparedStatement.toString());
 			result = preparedStatement.executeBatch();
 		} catch (Exception e) {
 			//logg.Error("Class JDBCWrapper JDBC doBatchUnCommit is failed! "+sqlText);

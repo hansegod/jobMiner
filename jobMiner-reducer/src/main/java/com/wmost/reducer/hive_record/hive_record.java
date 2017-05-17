@@ -35,6 +35,10 @@ public class hive_record {
 				type = LOG.LOG_TYPE.LOG_TYPE_COMPANY;
 				o = new company(msg);
 				break;
+			case LOG.LOG_TYPE.LOG_TYPE_CANDIDATE+"":
+				type = LOG.LOG_TYPE.LOG_TYPE_CANDIDATE;
+				o = new candidate(msg);
+				break;
 			default:
 				break;
 		}

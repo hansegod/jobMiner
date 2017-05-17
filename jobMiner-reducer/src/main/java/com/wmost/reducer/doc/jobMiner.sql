@@ -5,6 +5,7 @@
 @data	2017-04-21	00:00	初稿
 		2017-04-27	21:01	调整,写入成功
 		2017-05-03	21:01	调整id字段
+		2017-05-17	21:01	部分字段长度调整
 		
 */
 
@@ -18,7 +19,7 @@ CREATE TABLE `position` (
 	
 	`time_stamp` 	varchar(20) 	DEFAULT '' COMMENT '日志时间戳',
 	`log_type` 		varchar(4) 		DEFAULT '' COMMENT '日志类型',
-	`search_key` 	varchar(32) 	DEFAULT '' COMMENT '日志唯一标识[0-9A-Za-z]{32}',
+	`search_key` 	varchar(64) 	DEFAULT '' COMMENT '日志唯一标识[0-9A-Za-z]{32}',
 	`time_ms` 		varchar(10) 	DEFAULT '' COMMENT '处理耗时(ms)',
 	`error_code` 	varchar(10) 	DEFAULT '' COMMENT '错误码',
 	
@@ -40,8 +41,8 @@ CREATE TABLE `position` (
 	`major` 			varchar(64) 	DEFAULT '' COMMENT '学历',
 	`school` 			varchar(64) 	DEFAULT '' COMMENT '学校',
 	`experience` 		varchar(512) 	DEFAULT '' COMMENT '经验',
-	`tag` 				varchar(64) 	DEFAULT '' COMMENT '标签',
-	`duty` 				varchar(64) 	DEFAULT '' COMMENT '职责',
+	`tag` 				varchar(512) 	DEFAULT '' COMMENT '标签',
+	`duty` 				varchar(1024) 	DEFAULT '' COMMENT '职责',
 	
 	
 	`server_ip` 	varchar(64) 	DEFAULT '' COMMENT '服务器ip地址',
@@ -57,7 +58,7 @@ CREATE TABLE `company` (
 	
 	`time_stamp` 	varchar(20) 	DEFAULT '' COMMENT '日志时间戳',
 	`log_type` 		varchar(4) 		DEFAULT '' COMMENT '日志类型',
-	`search_key` 	varchar(32) 	DEFAULT '' COMMENT '日志唯一标识[0-9A-Za-z]{32}',
+	`search_key` 	varchar(64) 	DEFAULT '' COMMENT '日志唯一标识[0-9A-Za-z]{32}',
 	`time_ms` 		varchar(10) 	DEFAULT '' COMMENT '处理耗时(ms)',
 	`error_code` 	varchar(10) 	DEFAULT '' COMMENT '错误码',
 	
@@ -72,7 +73,7 @@ CREATE TABLE `company` (
 	`salary` 			varchar(10) 	DEFAULT '' COMMENT '薪资',
 	`location` 			varchar(64) 	DEFAULT '' COMMENT '地址',
 	`website` 			varchar(64) 	DEFAULT '' COMMENT '网址',
-	`tag` 				varchar(64) 	DEFAULT '' COMMENT '标签',
+	`tag` 				varchar(512) 	DEFAULT '' COMMENT '标签',
 	
 	
 	`server_ip` 	varchar(64) 	DEFAULT '' COMMENT '服务器ip地址',
@@ -88,7 +89,7 @@ CREATE TABLE `candidate` (
 	
 	`time_stamp` 	varchar(20) 	DEFAULT '' COMMENT '日志时间戳',
 	`log_type` 		varchar(4) 		DEFAULT '' COMMENT '日志类型',
-	`search_key` 	varchar(32) 	DEFAULT '' COMMENT '日志唯一标识[0-9A-Za-z]{32}',
+	`search_key` 	varchar(64) 	DEFAULT '' COMMENT '日志唯一标识[0-9A-Za-z]{32}',
 	`time_ms` 		varchar(10) 	DEFAULT '' COMMENT '处理耗时(ms)',
 	`error_code` 	varchar(10) 	DEFAULT '' COMMENT '错误码',
 	
@@ -116,7 +117,7 @@ CREATE TABLE `candidate` (
 	`expect_type` 		varchar(4) 		DEFAULT '' COMMENT '类型*',
 	`expect_salary` 	varchar(10) 	DEFAULT '' COMMENT '薪资*',
 	`expect_location` 	varchar(64) 	DEFAULT '' COMMENT '地址*',
-	`tag` 				varchar(64) 	DEFAULT '' COMMENT '标签',
+	`tag` 				varchar(512) 	DEFAULT '' COMMENT '标签',
 	
 	
 	`server_ip` 	varchar(64) 	DEFAULT '' COMMENT '服务器ip地址',

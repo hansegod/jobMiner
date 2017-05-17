@@ -50,6 +50,44 @@ public class candidate {
 	
 	public candidate(){}
 	
+	public candidate(String msg) {
+		String[] splited = UNICODE.SPACE.split(msg);
+		
+		int i = 0;
+		time_stamp			= splited[i++];
+		log_type			= splited[i++];
+		search_key			= splited[i++];
+		time_ms				= splited[i++];
+		error_code			= splited[i++];
+		
+		key					= splited[i++];
+		src					= splited[i++];
+		name				= splited[i++];
+		gender				= splited[i++];
+		ethnic				= splited[i++];
+		major				= splited[i++];
+		school				= splited[i++];
+		capacity			= splited[i++];
+		experience			= splited[i++];
+		industry			= splited[i++];
+		scale				= splited[i++];
+		nature				= splited[i++];
+		position			= splited[i++];
+		type				= splited[i++];
+		salary				= splited[i++];
+		location			= splited[i++];
+		expect_industry		= splited[i++];
+		expect_scale		= splited[i++];
+		expect_nature		= splited[i++];
+		expect_position		= splited[i++];
+		expect_type			= splited[i++];
+		expect_salary		= splited[i++];
+		expect_location		= splited[i++];
+		tag					= splited[i++];
+		
+		server_ip			= splited[i++];
+	}
+	
 	@Override
 	public String toString() {
 		return String.join(

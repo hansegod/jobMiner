@@ -93,7 +93,7 @@ public class position implements tables_interface{
 		return "INSERT INTO " 
 				+ TABLE 
 				+ " (time_stamp,log_type,search_key,time_ms,error_code,`key`,src,name,company,industry,scale,nature,website,count,type,pubtime,offtime,salary,location,major,school,experience,tag,duty,server_ip) "
-				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     }
 	
 	@Override
@@ -122,6 +122,7 @@ public class position implements tables_interface{
 				time_ms				,
 				error_code			,
 				
+				key					,
 				src					,
 				name				,
 				company				,
@@ -159,6 +160,7 @@ public class position implements tables_interface{
 				time_ms				,
 				error_code			,
 				
+				key					,
 				src					,
 				name				,
 				company				,

@@ -20,6 +20,7 @@ import java.util.concurrent.BlockingQueue;
 import com.google.gson.Gson;
 import com.wmost.cfig.LOG;
 import com.wmost.reducer.hive_record.hive_record;
+import com.wmost.reducer.tables.candidate;
 import com.wmost.reducer.tables.company;
 import com.wmost.reducer.tables.position;
 import com.wmost.reducer.tables.tables_interface;
@@ -80,6 +81,7 @@ public class hive implements Runnable{
 		synchronized(hive.class){
 			while(!buffer.isEmpty()){
 				String msg = hive.distribution();
+				//根据不同日志类型生成对应日志对象
 				hive_record o = new hive_record(msg);
 				if (null != o) {
 					hive_records.add(o);	
@@ -92,6 +94,7 @@ public class hive implements Runnable{
 		for (final hive_record record : hive_records) {
 			String json = new Gson().toJson(record.o);
 			tables_interface o = null;
+			//根据不同日志对象生成对应数据库对象
 			switch(record.type) {
 				case LOG.LOG_TYPE.LOG_TYPE_POSITION:
 					o = new Gson().fromJson(json, position.class);
@@ -99,10 +102,16 @@ public class hive implements Runnable{
 				case LOG.LOG_TYPE.LOG_TYPE_COMPANY:
 					o = new Gson().fromJson(json, company.class);
 					break;
+				case LOG.LOG_TYPE.LOG_TYPE_CANDIDATE:
+					o = new Gson().fromJson(json, candidate.class);
+					break;
 				default:
 					break;
 			}
-			tables_records.add(o);
+			if(null!=o){
+				tables_records.add(o);
+				//System.out.println("增加记录:"+o.toString());
+			}
 		}
 		hive_records.clear();
 		
@@ -132,10 +141,12 @@ public class hive implements Runnable{
 		  					ArrayList<Object[]> updateParametersList = new ArrayList<Object[]>();
 		  					updateParametersList.add(iter.getUpdataObj());
 		  					jdbcWrapper.doBatchUnCommit(sql_updating, updateParametersList,conn);
+		  					//System.out.println("更新记录:"+iter.toString());
 		  				} else {
 		  					ArrayList<Object[]> insertParametersList = new ArrayList<Object[]>();
 		  					insertParametersList.add(iter.getInsertObj());
 		  					jdbcWrapper.doBatchUnCommit(sql_inserting, insertParametersList,conn);
+		  					//System.out.println("插入记录:"+iter.toString());
 		  				}
 		  			}
 					@Override
