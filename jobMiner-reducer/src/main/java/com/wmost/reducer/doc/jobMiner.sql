@@ -6,6 +6,7 @@
 		2017-04-27	21:01	调整,写入成功
 		2017-05-03	21:01	调整id字段
 		2017-05-17	21:01	部分字段长度调整
+		2017-05-18	09:01	对experience类型进行了text扩充
 		
 */
 
@@ -40,7 +41,7 @@ CREATE TABLE `position` (
 	`location` 			varchar(64) 	DEFAULT '' COMMENT '地址',
 	`major` 			varchar(64) 	DEFAULT '' COMMENT '学历',
 	`school` 			varchar(64) 	DEFAULT '' COMMENT '学校',
-	`experience` 		varchar(512) 	DEFAULT '' COMMENT '经验',
+	`experience` 		text					   COMMENT '经验',
 	`tag` 				varchar(512) 	DEFAULT '' COMMENT '标签',
 	`duty` 				varchar(1024) 	DEFAULT '' COMMENT '职责',
 	
@@ -102,7 +103,7 @@ CREATE TABLE `candidate` (
 	`school` 			varchar(64) 	DEFAULT '' COMMENT '学校',
 	`major` 			varchar(64) 	DEFAULT '' COMMENT '学历',
 	`capacity` 			varchar(64) 	DEFAULT '' COMMENT '能力',
-	`experience` 		varchar(512) 	DEFAULT '' COMMENT '经验',
+	`experience` 		text					   COMMENT '经验',
 	`industry` 			varchar(64) 	DEFAULT '' COMMENT '行业',
 	`scale` 			varchar(20) 	DEFAULT '' COMMENT '规模',
 	`nature` 			varchar(64) 	DEFAULT '' COMMENT '性质',

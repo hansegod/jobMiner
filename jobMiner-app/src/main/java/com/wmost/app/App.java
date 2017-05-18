@@ -7,6 +7,7 @@
 		2017-04-21	21:51	对JSON与对象互转方法进行了升级,采用util中方法,并增强了调试日志输出
 		2017-04-21	22:21	升级获取外网IP方法
 		2017-04-23	21:00	修改爬取信息组织形式,采用json封装对象数组至body,支持同时爬取多个对象
+		2017-05-18	09:01	v1.0.0数据写入基本调试通过
 		
 **/
 
@@ -20,7 +21,7 @@ import com.wmost.weber.weber;
 
 
 public class App {
-	private static String VERSION = "0.6.0";
+	private static String VERSION = "1.0.0";
 	
 	public static void main(String[] args) {
 		long startTime, endTime;

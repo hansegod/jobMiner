@@ -53,6 +53,7 @@ public class position {
 		time_ms				= splited[i++];
 		error_code			= splited[i++];
 
+		key					= splited[i++];
 		src					= splited[i++];
 		name				= splited[i++];
 		company				= splited[i++];

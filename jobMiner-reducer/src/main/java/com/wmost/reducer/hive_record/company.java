@@ -47,6 +47,7 @@ public class company {
 		time_ms				= splited[i++];
 		error_code			= splited[i++];
 		
+		key					= splited[i++];
 		src					= splited[i++];
 		name				= splited[i++];
 		industry			= splited[i++];
