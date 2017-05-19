@@ -12,20 +12,21 @@ package com.wmost.reducer;
 
 public class cluster {
 	public static void Submit(){
+		//启动flume日志收集服务
 		new Thread(new flume_in()).start();
-		
+		//启动kafka消息服务
 		new Thread(new kafka()).start();
-		
+		//启动spark实时计算服务
 		new Thread(new spark()).start();
-		
+		//启动storm数据清洗服务
 		new Thread(new storm()).start();
-		
+		//启动hdfs入仓服务
 		new Thread(new hdfs()).start();
-		
+		//启动flume数据落地服务
 		new Thread(new flume_out()).start();
-		
+		//启动hive统计计算服务
 		new Thread(new hive()).start();
-		
+		//启动zookeeper同步管理服务
 		new Thread(new zookeeper()).start();
 	}
 }
