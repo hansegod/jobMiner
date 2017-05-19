@@ -88,7 +88,7 @@ public class JDBCWrapper {
 			}
 		}
 		//2.生成连接池
-		String dburl = "jdbc:mysql://"+ server + "/" + db;
+		String dburl = "jdbc:mysql://"+ server + "/" + db+"?useUnicode=true&characterEncoding=utf8";
 		//logg.Println("Class JDBCWrapper connect to:" + dburl + "/use:" + name + "/" + password);
 		for (int i = 0; i < pool; i++){
 			try {
